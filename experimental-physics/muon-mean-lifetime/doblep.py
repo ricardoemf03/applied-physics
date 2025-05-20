@@ -25,16 +25,16 @@ double_pulse_data = []
 for i in range(pc):
     y = np.array(DataFile.paaGetPulseRP(i))  # Obtener señal del pulso
     
-    # Detectar los puntos donde la señal baja de -150
+    # Detectar los puntos donde la señal baja de -300
     below_thresh = np.where(y < threshold)[0]
 
     # Verificar si hay al menos 2 regiones separadas
     if len(below_thresh) >= 2:
         # Para considerar que son dos pulsos separados, los índices deben estar alejados
-        if np.max(np.diff(below_thresh)) > 50:  # puedes ajustar el 50 si hace falta
+        if np.max(np.diff(below_thresh)) > 50:  # 
             double_pulse_data.append(y)
 
-# Guardar los datos en un archivo .npz (puedes luego convertirlo a CSV si quieres)
+# Guardar los datos en un archivo .npz 
 np.savez("double_pulses.npz", *double_pulse_data)
 print(f"{len(double_pulse_data)} pulsos con doble caída guardados.")
 
